@@ -26,4 +26,4 @@ library(testthat)
 test_dir(test_path(), reporter="Summary")
 ```
 
-Just started.
+Test: Just started.
