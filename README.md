@@ -1,4 +1,5 @@
 # Repository to hold class activities for GEO511
+Coursework for Spatial Data Science!
 
 ## Overview
 This template repository is set up to hold the semester's case study assignments for GEO511. 
@@ -25,5 +26,3 @@ To test whether the code passes before you submit to GitHub, run the following l
 library(testthat)
 test_dir(test_path(), reporter="Summary")
 ```
-
-Test: Just started.
