@@ -1,2 +1,3 @@
 data(iris)
 
+head(iris)
