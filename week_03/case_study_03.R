@@ -11,7 +11,7 @@ library(here)
  
 # plot 1
 gap_filtered <- gapminder %>%
-   filter(country != "Kuwait")
+   filter(country != "Kuwait") 
  
 p1 <- ggplot(gap_filtered) +
    aes(x=lifeExp, y=gdpPercap,
@@ -34,11 +34,12 @@ gapminder_continent <- gap_filtered %>%
 # firstly, plot from the original gapminder dataset
 p_original <- ggplot(data=gap_filtered,
              aes(x=year, y=gdpPercap,
-                 size=pop/10000, color=continent)) +
+                 size=pop/100000, color=continent)) +
   geom_point() +
   geom_line(aes(group=country), size=0.5) +
   theme_bw() +
-  scale_size_continuous(breaks=c(10000,20000,30000)) +
+  theme(axis.text = element_text(size=9L)) +
+  scale_size_continuous(breaks=c(10000,20000,30000), range=c(1,5)) +
   facet_wrap(~continent, nrow=1) +
   labs(x="Year",
        y="GDP per capita",
@@ -57,6 +58,6 @@ path = here("week_03")
 png(file=paste(path, "/p1.png", sep=""), width=800, height= 300)
 print(p1)
 dev.off()
-png(file=paste(path, "/p2.png", sep=""), width=800, height= 250)
+png(file=paste(path, "/p2.png", sep=""), width=1000, height= 250)
 print(p2)
 dev.off()
