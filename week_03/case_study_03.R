@@ -1,7 +1,7 @@
 # Case 3: Wealth over time
 #-----------------------------------------
 # Wei Liu
-# 09/20/2021, updated on 09/21/2021
+# 09/20/2021, updated on 09/23/2021
 #-----------------------------------------
 
 library(ggplot2)
@@ -21,7 +21,7 @@ p1 <- ggplot(gap_filtered) +
    scale_y_continuous(trans = "sqrt") +
    facet_wrap(~year,nrow=1) +
    labs(x="Life Expectancy",
-        y="GDP per capita",
+        y="GDP Per Capita",
         size="Population (100k)",
         color="Continent")
 p1
@@ -39,7 +39,7 @@ p_original <- ggplot(data=gap_filtered,
   geom_line(aes(group=country), size=0.5) +
   theme_bw() +
   theme(axis.text = element_text(size=9L)) +
-  scale_size_continuous(breaks=c(10000,20000,30000), range=c(1,5)) +
+  scale_size_continuous(breaks=c(10000,20000,30000), range=c(0.7,5)) +
   facet_wrap(~continent, nrow=1) +
   labs(x="Year",
        y="GDP per capita",
