@@ -1,22 +1,36 @@
 ---
 title: "Case Study 04"
-author: Your Name
-date: August 1, 2020
+author: "Wei Liu"
+date: September 28, 2021
 output: github_document
 ---
 
-## First Header
+## Find the farthest airport
 
 Comments
 
 ```{r}
-summary(cars)
+library(tidyverse)
+library(nycflights13)
+
+farthest_airport <- flights %>%
+  arrange(desc(distance)) %>%
+  slice(1) %>% # only keep the first row
+  inner_join(airports, by=c("dest"="faa")) %>%
+  select(name) # keep only the "name" col
+as.character(farthest_airport) # change the data frame to characters
+
 ```
 
-## Second Header
+## Plot out all the airports
 
 Comments
 
 ```{r}
-plot(pressure)
+airports %>%
+  distinct(lon,lat) %>%
+  ggplot(aes(lon, lat)) +
+  borders("world") +
+  geom_point(col="purple") +
+  coord_quickmap()
 ```
