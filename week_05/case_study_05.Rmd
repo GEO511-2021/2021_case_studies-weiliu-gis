@@ -1,7 +1,7 @@
 ---
 title: "Case Study 05: Beware the Canadians!"
 author: "Wei Liu"
-date: October 3, 2021
+date: October 6, 2021
 output: github_document
 ---
 
@@ -20,7 +20,11 @@ dataset of world
 
 ```{r}
 data(world)
-st_crs(world)
+st_crs(world) # show the coordinate reference system of world dataset
+```
+
+```{r, message=FALSE}
+head(world)
 ```
 
 dataset of us_states
@@ -28,6 +32,10 @@ dataset of us_states
 ```{r}
 data(us_states)
 st_crs(us_states)
+```
+
+```{r, message=FALSE}
+head(us_states)
 ```
 
 ## Prepare the data for buffering
@@ -49,7 +57,7 @@ NY_trans = st_transform(NY, crs=albers)
 
 ## Buffer, intersection and area
 
-```{r}
+```{r, warning=FALSE}
 Canada_buffer = st_buffer(Canada_trans, dist=10000) # The default unit is meter.
 border = st_intersection(Canada_buffer, NY_trans)
 st_area(border) %>% set_units(km^2)
