@@ -36,5 +36,5 @@ hottest_country <- max_temp %>%
   select(name_long, continent, tmax) %>%
   st_set_geometry(NULL) %>%
   arrange(desc(tmax))
-View(hottest_country)
 
+View(hottest_country)
