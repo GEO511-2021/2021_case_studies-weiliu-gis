@@ -15,7 +15,7 @@ library(sf)
 
 ## Prepare the data
 
-**world —&gt; world\_sp**
+**Polygons: world —&gt; world\_sp**
 
 ``` r
 data(world)  #load 'world' data from spData package
@@ -23,7 +23,7 @@ world_new <- filter(world, continent!="Antarctica")
 world_sp <- as(world_new,"Spatial")
 ```
 
-**tmax\_monthly —&gt; tmax\_annual**
+**Raster: tmax\_monthly —&gt; tmax\_annual**
 
 ``` r
 tmax_monthly <- getData(name = "worldclim", var="tmax", res=10)
