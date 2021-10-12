@@ -33,6 +33,7 @@ names(tmax_annual) <- "tmax"
 ```
 
 ## Extract the value and make a plot
+
 ```{r, fig.align='center'}
 max_temp <- raster::extract(tmax_annual, world_sp,
                 fun=max, na.rm=T, small=T, sp=T) %>%
@@ -44,6 +45,7 @@ ggplot(max_temp, aes(fill=tmax)) +
 ```
 
 ## Find the hottest country in each continent
+
 ```{r}
 hottest_country <- max_temp %>%
   group_by(continent) %>%
