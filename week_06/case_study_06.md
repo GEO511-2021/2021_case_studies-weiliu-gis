@@ -56,17 +56,15 @@ hottest_country <- max_temp %>%
   st_set_geometry(NULL) %>%
   arrange(desc(tmax))
 
-hottest_country
+knitr::kable(hottest_country) # inspired by Hui
 ```
 
-    ## # A tibble: 7 x 3
-    ## # Groups:   continent [7]
-    ##   name_long                           continent                tmax
-    ##   <chr>                               <chr>                   <dbl>
-    ## 1 Algeria                             Africa                   48.9
-    ## 2 Iran                                Asia                     46.7
-    ## 3 United States                       North America            44.8
-    ## 4 Australia                           Oceania                  41.8
-    ## 5 Argentina                           South America            36.5
-    ## 6 Spain                               Europe                   36.1
-    ## 7 French Southern and Antarctic Lands Seven seas (open ocean)  11.8
+| name\_long                          | continent               | tmax |
+|:------------------------------------|:------------------------|-----:|
+| Algeria                             | Africa                  | 48.9 |
+| Iran                                | Asia                    | 46.7 |
+| United States                       | North America           | 44.8 |
+| Australia                           | Oceania                 | 41.8 |
+| Argentina                           | South America           | 36.5 |
+| Spain                               | Europe                  | 36.1 |
+| French Southern and Antarctic Lands | Seven seas (open ocean) | 11.8 |

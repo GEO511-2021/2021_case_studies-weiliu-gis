@@ -54,7 +54,7 @@ hottest_country <- max_temp %>%
   st_set_geometry(NULL) %>%
   arrange(desc(tmax))
 
-hottest_country
+knitr::kable(hottest_country) # inspired by Hui
 ```
 
 

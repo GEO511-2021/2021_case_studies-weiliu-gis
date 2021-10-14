@@ -37,4 +37,4 @@ hottest_country <- max_temp %>%
   st_set_geometry(NULL) %>%
   arrange(desc(tmax))
 
-hottest_country
+kable(hottest_country)
