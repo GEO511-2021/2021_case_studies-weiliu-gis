@@ -9,4 +9,3 @@ ggplot(world,aes(x=gdpPercap, color=continent, fill=continent)) +
   geom_density(alpha=0.5,color=F) +
   xlab("GDP Per Capita") +
   ylab("Density")
-
