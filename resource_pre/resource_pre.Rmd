@@ -2,7 +2,7 @@
 title: "gganimate: Your data can dance"
 author: "Wei Liu"
 date: "10/25/2021"
-output: revealjs::revealjs_presentation
+output: github_document
 ---
 
 ## What??? :confused:
@@ -143,7 +143,7 @@ Then we need an example to make it clear. :sparkles:
 
 ```{r, fig.align='center'}
 anim1 +
-  ease_aes('sine-out')
+  ease_aes(y='cubic-out')
 ```
 
 Try another option... :sparkles:

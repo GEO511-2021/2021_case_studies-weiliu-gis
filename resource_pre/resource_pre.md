@@ -164,7 +164,7 @@ Then we need an example to make it clear. :sparkles:
 
 ``` r
 anim1 +
-  ease_aes('sine-out')
+  ease_aes(y='cubic-out')
 ```
 
 <img src="resource_pre_files/figure-gfm/unnamed-chunk-5-1.gif" style="display: block; margin: auto;" />
