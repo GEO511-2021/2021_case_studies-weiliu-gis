@@ -2,7 +2,7 @@
 title: "gganimate: Your data can dance"
 author: "Wei Liu"
 date: "10/25/2021"
-output: github_document
+output: revealjs::revealjs_presentation
 ---
 
 ## What??? :confused:
