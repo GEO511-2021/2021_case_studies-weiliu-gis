@@ -1,13 +1,11 @@
----
-title: "Case Study 09: Tracking Hurricanes!"
-author: Wei Liu
-date: November 2, 2021
-output: github_document
----
+Case Study 09: Tracking Hurricanes!
+================
+Wei Liu
+November 2, 2021
 
 ## Libraries
 
-```{r, message=FALSE}
+``` r
 library(sf)
 library(tidyverse)
 library(ggmap)
@@ -20,7 +18,7 @@ data(us_states)
 
 ## Download data
 
-```{r, message=FALSE, results='hide'}
+``` r
 dataurl="https://www.ncei.noaa.gov/data/international-best-track-archive-for-climate-stewardship-ibtracs/v04r00/access/shapefile/IBTrACS.NA.list.v04r00.points.zip"
 tdir=tempdir()
 download.file(dataurl,destfile=file.path(tdir,"temp.zip"))
@@ -30,7 +28,7 @@ list.files(tdir)
 
 ## Prepare the data
 
-```{r, results='hide'}
+``` r
 storm_data <- read_sf(list.files(tdir,pattern=".shp",full.names = T))
 
 storm_filtered <- storm_data %>%
@@ -42,7 +40,7 @@ region <- st_bbox(storm_filtered)
 
 ## Make the plot
 
-```{r, fig.align='center'}
+``` r
 ggplot() +
   geom_sf(data=world, inherit.aes=F) +
   facet_wrap(~decade) +
@@ -56,9 +54,11 @@ ggplot() +
   theme(axis.title=element_blank())
 ```
 
+<img src="case_study_09_files/figure-gfm/unnamed-chunk-4-1.png" style="display: block; margin: auto;" />
+
 ## Calculate table of the five states with most storms
 
-```{r}
+``` r
 us_states = st_transform(us_states, crs=st_crs(storm_filtered))
 colnames(us_states)[colnames(us_states) == "NAME"] <- "STATE"
 
@@ -71,3 +71,11 @@ storm_states <- st_join(storm_filtered, us_states, join = st_intersects,left = F
 
 kable(storm_states)
 ```
+
+| STATE          | storms |
+|:---------------|-------:|
+| Florida        |     84 |
+| North Carolina |     64 |
+| Georgia        |     60 |
+| Texas          |     54 |
+| Louisiana      |     52 |

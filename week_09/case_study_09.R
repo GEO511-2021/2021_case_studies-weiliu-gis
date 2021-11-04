@@ -19,7 +19,7 @@ storm_filtered <- storm_data %>%
   filter(SEASON >= 1950) %>%
   mutate_if(is.numeric, function(x) ifelse(x==-999.0,NA,x)) %>%
   mutate(decade=(floor(year/10)*10))
-region <- st_bbox(storm_filtered)
+region <- st_bbox(storm_filtered) # Without setting the bounding box in this line, the code will return the whole map.
 
 ggplot() +
   geom_sf(data=world, inherit.aes=F) +
