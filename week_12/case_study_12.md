@@ -1,4 +1,4 @@
-Case Study 12:
+Case Study 12: Dynamic HTML graph of Daily Temperatures
 ================
 Wei Liu
 November 30, 2021

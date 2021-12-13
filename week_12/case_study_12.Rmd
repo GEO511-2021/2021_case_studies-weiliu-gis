@@ -1,5 +1,5 @@
 ---
-title: "Case Study 12: "
+title: "Case Study 12: Dynamic HTML graph of Daily Temperatures"
 author: Wei Liu
 date: November 30, 2021
 output: github_document
