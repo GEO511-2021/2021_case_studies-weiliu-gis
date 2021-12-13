@@ -1,13 +1,11 @@
----
-title: "Case Study 11: Parallel Computing with R"
-author: "Wei Liu"
-date: November 21, 2021
-output: github_document
----
+Case Study 11: Parallel Computing with R
+================
+Wei Liu
+November 21, 2021
 
 # Load needed packages
 
-```{r, message=FALSE, warning=FALSE}
+``` r
 library(tidyverse)
 library(spData)
 library(sf)
@@ -20,16 +18,20 @@ registerDoParallel(4)
 getDoParWorkers() # check registered cores
 ```
 
+    ## [1] 4
+
 # Census API key
 
-```{r, message = FALSE}
+``` r
 library(tidycensus)
 census_api_key("a718a73636c5abd5f89dfb04bad709219e4468d2", install = TRUE, overwrite = TRUE)
 ```
 
+    ## [1] "a718a73636c5abd5f89dfb04bad709219e4468d2"
+
 # Download Census data
 
-```{r}
+``` r
 library(tidycensus)
 racevars <- c(White = "P005003", 
               Black = "P005004", 
@@ -42,14 +44,20 @@ erie <- get_decennial(geography = "block", variables = racevars,
                   summary_var = "P001001", cache_table=TRUE)
 ```
 
+    ## Getting data from the 2010 decennial Census
 
-```{r, results='hide'}
+    ## Using Census Summary File 1
+
+``` r
 erie_small=st_crop(erie,xmin=-78.9,xmax=-78.85,ymin=42.888,ymax=42.92)
 ```
 
+    ## Warning: attribute variables are assumed to be spatially constant throughout all
+    ## geometries
+
 # Parallel computing
 
-```{r, message=FALSE, warning = FALSE, result = 'hide'}
+``` r
 race_map <- foreach(i=unique(erie_small$variable),.combine='rbind') %dopar% {
   filter(erie_small,variable==i) %>%
     st_sample(size = .$value) %>%  # generate random points
@@ -60,6 +68,8 @@ race_map <- foreach(i=unique(erie_small$variable),.combine='rbind') %dopar% {
 
 # Display the map
 
-```{r, message=FALSE, warning = FALSE}
+``` r
 mapview(race_map, zcol = "variable",cex = 0.01,alpha = 0)
 ```
+
+![](case_study_11_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
