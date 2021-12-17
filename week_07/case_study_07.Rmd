@@ -1,7 +1,51 @@
 ---
-title: "Case Study 07"
-author: Your Name
+title: "Case Study 07: Getting Help!"
+author: Wei Liu
 date: August 1, 2020
 output: github_document
 ---
- 
+
+## Current version of my code
+
+There is some error.
+
+```{r, message=FALSE}
+library(tidyverse)
+library(reprex)
+library(sf)
+library(spData)
+
+data(world)
+
+ggplot(world,aes(x=gdpPercap, y=continent, color=continent))+
+  geom_density(alpha=0.5,color=F)
+```
+
+We need to copy the all the lines above.
+
+## Generate the reproducible example
+
+```{r, eval=FALSE}
+reprex(venue="gh")
+```
+
+## Post a new issue on GitHub
+
+Since the reprex content is already on the clipboard, just paste the reprex in the “leave a comment” box.
+
+
+# Corrected Code
+```{r}
+library(tidyverse)
+library(reprex)
+library(sf)
+
+library(spData)
+data(world)
+
+ggplot(world,aes(x=gdpPercap, color=continent, fill=continent)) +
+  geom_density(alpha=0.5,color=F) +
+  xlab("GDP Per Capita") +
+  ylab("Density")
+```
+

@@ -1,22 +1,31 @@
 ---
-title: "Case Study 04"
-author: Your Name
-date: August 1, 2020
+title: "Case Study 04: Farthest airport from New York City"
+author: "Wei Liu"
+date: September 30, 2021
 output: github_document
 ---
 
-## First Header
+## The R packages we need
 
-Comments
+To begin with, we activate 2 packages, namely *tidyverse* and *nycflights13* in our workplace.
 
-```{r}
-summary(cars)
+```{r, message=FALSE}
+library(tidyverse)
+library(nycflights13)
 ```
 
-## Second Header
+## Find the farthest airport
 
-Comments
+To do the task, we need 2 tables - *flights* and *airports* - in the *nycflights13* dataset. And also, there are some functions we may want, such as **arrange()**, **inner_join()**, etc.
 
 ```{r}
-plot(pressure)
+flights %>%
+  arrange(desc(distance)) %>%
+  slice(1) %>% # keep only the first row, since there are many duplicates
+  inner_join(airports, by=c("dest"="faa")) %>%
+  select(name) %>% # keep only the "name" column
+  as.character() # change the data frame to characters
 ```
+
+
+:) Now we get the answer. The farthest airport is "Honolulu Intl".

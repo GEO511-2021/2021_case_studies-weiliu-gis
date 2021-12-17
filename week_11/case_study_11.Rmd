@@ -1,7 +1,65 @@
 ---
-title: "Case Study 11"
-author: Your Name
-date: August 1, 2020
+title: "Case Study 11: Parallel Computing with R"
+author: "Wei Liu"
+date: November 21, 2021
 output: github_document
 ---
- 
+
+# Load needed packages
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(spData)
+library(sf)
+
+# New packages
+library(mapview) # new package that makes easy leaflet maps
+library(foreach)
+library(doParallel)
+registerDoParallel(4)
+getDoParWorkers() # check registered cores
+```
+
+# Census API key
+
+```{r, message = FALSE}
+library(tidycensus)
+census_api_key("a718a73636c5abd5f89dfb04bad709219e4468d2", install = TRUE, overwrite = TRUE)
+```
+
+# Download Census data
+
+```{r}
+library(tidycensus)
+racevars <- c(White = "P005003", 
+              Black = "P005004", 
+              Asian = "P005006", 
+              Hispanic = "P004003")
+
+options(tigris_use_cache = TRUE)
+erie <- get_decennial(geography = "block", variables = racevars, 
+                  state = "NY", county = "Erie County", geometry = TRUE,
+                  summary_var = "P001001", cache_table=TRUE)
+```
+
+
+```{r, results='hide'}
+erie_small=st_crop(erie,xmin=-78.9,xmax=-78.85,ymin=42.888,ymax=42.92)
+```
+
+# Parallel computing
+
+```{r, message=FALSE, warning = FALSE, result = 'hide'}
+race_map <- foreach(i=unique(erie_small$variable),.combine='rbind') %dopar% {
+  filter(erie_small,variable==i) %>%
+    st_sample(size = .$value) %>%  # generate random points
+    st_as_sf() %>% # transform into sf object
+    mutate(variable = i)
+}
+```
+
+# Display the map
+
+```{r, message=FALSE, warning = FALSE}
+mapview(race_map, zcol = "variable",cex = 0.01,alpha = 0)
+```

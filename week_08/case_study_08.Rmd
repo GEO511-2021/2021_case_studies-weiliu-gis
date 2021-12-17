@@ -1,7 +1,47 @@
 ---
-title: "Case Study 08"
-author: Your Name
-date: August 1, 2020
-output: github_document
+title: "Case Study 08: One Script, Many Products"
+author: Wei Liu
+date: October 26, 2021
+output:
+  html_document: default
+  github_document: default
+  powerpoint_presentation: default
+  word_document: default
 ---
- 
+
+```{r, message=FALSE, results='hide', echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(knitr)
+```
+
+
+```{r, message=FALSE, echo=FALSE, results='hide'}
+n2o = read_table(file="C:/CodeProjects/GEO511/2021_case_studies-weiliu-gis/week_08/n2o_annual_mean_global.txt", 
+                 skip=61, #skip first 61 lines
+                 col_names=c("Year","Mean","unc")) # give names to the columns
+```
+
+## Annual Mean Nitrous Oxide Concentrations 2001 - 2020
+
+```{r, fig.align='center', echo=FALSE}
+ggplot(n2o, aes(Year, Mean)) +
+  geom_line(color="blue") +
+  geom_point(color="darkblue") +
+  theme_light() +
+  labs(y="Mona Loa Annual Mean N2O (ppm)")
+```
+
+## Top Five Annual Mean Nitrous Oxide Concentrations at Mona Loa
+
+```{r, message=FALSE, echo=F}
+n2o %>%
+  arrange(desc(Mean)) %>% # sort descending
+  top_n(5, Mean) %>% # select first 5 rows
+  select("Year", "Mean") %>%
+  kable(align = "cc") %>%
+  kable_styling() %>% # you must have this line
+  row_spec(1, bold = T, color = "Red") %>% # Color the first row to be red
+  as_image(width=10, file="n2o.png")
+```
+
