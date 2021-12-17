@@ -27,11 +27,11 @@ From this article, I became aware that there were some correlation between crime
 
 # Proposed data sources
 
-1. Crime incidents
+1. Crime incidents: available from the website of Open Data Portal of the City of Buffalo.
 
 2. Census Block Groups (CBGs) 2010 of the City of Buffalo
 
-3. Sociodemographic data
+3. Sociodemographic data: U.S. Census
 
 # Proposed methods
 
